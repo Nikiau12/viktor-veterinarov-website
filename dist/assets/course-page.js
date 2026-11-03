@@ -3,12 +3,13 @@
 
   if (!index) return;
 
+  const nav = index.querySelector("nav");
   const links = Array.from(index.querySelectorAll('a[href^="#"]'));
   const sections = links
     .map((link) => document.querySelector(link.getAttribute("href")))
     .filter(Boolean);
 
-  if (!links.length || !sections.length) return;
+  if (!nav || !links.length || !sections.length) return;
 
   let activeId = "";
   let ticking = false;
@@ -24,6 +25,11 @@
 
       if (isActive) {
         link.setAttribute("aria-current", "location");
+
+        if (nav.scrollWidth > nav.clientWidth) {
+          const left = link.offsetLeft - nav.clientWidth / 2 + link.offsetWidth / 2;
+          nav.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+        }
       } else {
         link.removeAttribute("aria-current");
       }
@@ -33,7 +39,8 @@
   const updateActiveSection = () => {
     const header = document.querySelector(".site-header");
     const headerHeight = header ? header.offsetHeight : 0;
-    const readingLine = headerHeight + Math.min(window.innerHeight * 0.34, 300);
+    const indexHeight = window.innerWidth <= 900 ? index.offsetHeight : 0;
+    const readingLine = headerHeight + indexHeight + Math.min(window.innerHeight * 0.26, 220);
     let current = sections[0];
 
     sections.forEach((section) => {
