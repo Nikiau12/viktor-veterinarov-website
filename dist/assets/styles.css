@@ -1955,6 +1955,12 @@ blockquote {
     font-size: 10px;
   }
 
+  .site-nav a {
+    min-height: 28px;
+    display: inline-flex;
+    align-items: center;
+  }
+
   .home-hero {
     min-height: auto;
     gap: 35px;
@@ -2137,7 +2143,12 @@ blockquote {
   }
 
   .teaching-title {
-    font-size: 48px;
+    font-size: clamp(40px, 11.5vw, 46px);
+  }
+
+  .course-title-prefix,
+  .course-title-subject {
+    white-space: nowrap;
   }
 
   .course-facts {
@@ -2188,12 +2199,17 @@ blockquote {
 
   .course-page-title {
     margin-top: 14px;
-    font-size: 48px;
+    font-size: clamp(40px, 11.5vw, 46px);
     line-height: 1.02;
   }
 
   .course-page-title span {
     white-space: normal;
+  }
+
+  .course-page-title span:first-child,
+  .course-page-title span:last-child {
+    white-space: nowrap;
   }
 
   .course-hero-intro {
