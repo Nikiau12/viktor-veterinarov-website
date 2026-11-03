@@ -1,25 +1,3 @@
-const copyButton = document.querySelector("[data-copy-cv-link]");
-const copyStatus = document.querySelector("[data-copy-cv-status]");
-
-if (copyButton && copyStatus) {
-  copyButton.addEventListener("click", async () => {
-    const cvUrl = new URL("/cv/", window.location.href).href;
-
-    try {
-      await navigator.clipboard.writeText(cvUrl);
-      copyButton.textContent = "Link copied";
-      copyStatus.textContent = "The CV page link has been copied to the clipboard.";
-    } catch {
-      copyStatus.textContent = cvUrl;
-    }
-
-    window.setTimeout(() => {
-      copyButton.textContent = "Copy CV link";
-      copyStatus.textContent = "";
-    }, 3000);
-  });
-}
-
 (() => {
   const toc = document.querySelector(".cv-toc");
 
